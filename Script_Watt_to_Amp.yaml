@@ -1,0 +1,14 @@
+description: ""
+mode: single
+triggers:
+  - trigger: state
+    entity_id:
+      - input_number.xxx_helper
+conditions: []
+actions:
+  - action: number.set_value
+    target:
+      entity_id: number.go_e_xxx_set_max_ampere_limit
+    data:
+      value: >-
+        {{ (states('input_number.xxx_helper') | float / 690) | round(0) | int }}

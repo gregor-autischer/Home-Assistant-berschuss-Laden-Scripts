@@ -1,0 +1,16 @@
+description: ""
+mode: single
+triggers:
+  - trigger: state
+    entity_id: sensor.shelly_xxx_power
+conditions:
+  - condition: template
+    value_template: >-
+      {{ states('sensor.shelly_xxx_power') | float < 0 }}
+actions:
+  - action: input_number.set_value
+    target:
+      entity_id: input_number.xxx_helper
+    data:
+      value: >-
+        {{ (states('sensor.shelly_xxx_power') | float * -1) | round(0) | int }}
